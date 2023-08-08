@@ -4,6 +4,7 @@ EXPECTED_TO_PASS = False
 PASS = False
 FAIL = True
 
+# Default message if test not implemented
 TEST_NOT_IMPLEMENTED = "Test not implemented"
 
 
