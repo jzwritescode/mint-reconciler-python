@@ -162,3 +162,5 @@ cython_debug/
 
 # JEZ:  Hide data directory contents
 .data/**
+
+tests/.pytest_cache
