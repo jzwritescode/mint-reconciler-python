@@ -26,16 +26,15 @@
 
 # This is a starter workflow to help you get started with EthicalCheck Actions
 
-name: EthicalCheck-Workflow
+name: mint-reconciler-python-ethnical-workflow
 
 # Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for the "main" branch
-  # Customize trigger events based on your DevSecOps processes.
+  # Triggers the workflow on push or pull request events but for each branch
   push:
-    branches: branches: [ "main", "test", "dev"]
+    branches: [ "main", "test", "dev"]
   pull_request:
-    branches: branches: [ "main", "test", "dev"]
+    branches: [ "main", "test", "dev"]
   schedule:
     - cron: '15 05 * * *'
 
@@ -59,7 +58,7 @@ jobs:
           # The OpenAPI Specification URL or Swagger Path or Public Postman collection URL.
           oas-url: "http://netbanking.apisec.ai:8080/v2/api-docs"
           # The email address to which the penetration test report will be sent.
-          email: "xxx@apisec.ai"
+          email: "github@javierzapanta.com"
           sarif-result-file: "ethicalcheck-results.sarif"
 
        - name: Upload sarif file to repository
