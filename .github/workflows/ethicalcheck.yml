@@ -26,7 +26,7 @@
 
 # This is a starter workflow to help you get started with EthicalCheck Actions
 
-name: mint-reconciler-python-ethnical-workflow
+name: mint-reconciler-python-ethical-check-workflow
 
 # Controls when the workflow will run
 on:
@@ -37,6 +37,7 @@ on:
     branches: [ "main", "test", "dev"]
   schedule:
     - cron: '15 05 * * *'
+
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
