@@ -45,7 +45,7 @@ class TestPandasDataLoader:
         result = EXPECTED_TO_FAIL
         test_object = None
         try:
-            test_object = PandasDataLoader(file_path="/path/to/file.csv", file_type="")
+            test_object = PandasDataLoader(file_path="", file_type="")
             test_object.empty_value_check(test_object.file_type)
         except AttributeError:
             result = PASS
@@ -113,7 +113,7 @@ class TestPandasDataLoader:
     def test_select_pandas_import_method_excel(self):
         result = EXPECTED_TO_PASS
         expected_value = "read_excel"
-        test_object = PandasDataLoader(file_path="../.data/test/file.xlsx")
+        test_object = PandasDataLoader(file_path="data/file.xlsx")
         method = test_object.select_pandas_import_engine()
         result = method == expected_value
         AssertionMessageHandler(f"Engine Check {test_object.file_type}", not result)
@@ -121,7 +121,7 @@ class TestPandasDataLoader:
     def test_select_pandas_import_method_csv(self):
         result = EXPECTED_TO_PASS
         expected_value = "read_csv"
-        test_object = PandasDataLoader(file_path="../.data/test/file.csv")
+        test_object = PandasDataLoader(file_path="data/file.csv")
         method = test_object.select_pandas_import_engine()
         result = method == expected_value
         AssertionMessageHandler(f"Engine Check {test_object.file_type}", not result)
@@ -134,11 +134,11 @@ class TestPandasDataLoader:
         AssertionMessageHandler(f"Engine Check {test_object.file_type}", not result)
 
     def test_create_dataframe_from_file(self):
-        test_object = PandasDataLoader(file_path="../.data/test/file.csv")
+        test_object = PandasDataLoader(file_path="data/file.csv")
         test_object.data_frame = test_object.create_data_frame_from_file()
 
     def test_create_data_frame_csv(self):
-        test_object = PandasDataLoader(file_path="../.data/test/file.csv")
+        test_object = PandasDataLoader(file_path="data/file.csv")
         df = test_object.create_data_frame_csv()
         result = (len(df) > 0)
         AssertionMessageHandler("Create from CSV", not result)
