@@ -9,4 +9,9 @@ TEST_NOT_IMPLEMENTED = "Test not implemented"
 
 
 # FILE TYPE VALIDATION
-VALID_FILE_TYPES = ['xls', 'xlsx', 'odf', 'ods', 'odt']
+VALID_FILE_TYPES = ['.xls', '.xlsx', '.odf', '.ods', '.odt', '.csv', '.txt', '.tsv', '.dat']
+
+VALID_READER_ENGINE = {"read_excel": ('.xls', '.xlsx', '.odf', '.ods', '.odt'),
+                       "read_csv": ('.csv', '.txt', '.tsv', '.dat')
+                       }
+

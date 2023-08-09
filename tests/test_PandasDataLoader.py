@@ -105,9 +105,46 @@ class TestPandasDataLoader:
         @precondition - file should have extension
         @return: None
         """
-        # filename, file_extension = os.path.splitext('/path/to/somefile.ext')
-        # expected_pass = self.check_file_type()
-        AssertionMessageHandler(TEST_NOT_IMPLEMENTED, FAIL)
+        result = EXPECTED_TO_PASS
+        test_object = PandasDataLoader(file_path="/path/to/file.csv")
+        result = test_object.valid_file_type()
+        AssertionMessageHandler(f"File type check {test_object.file_path}", not result)
+
+    def test_select_pandas_import_method_excel(self):
+        result = EXPECTED_TO_PASS
+        expected_value = "read_excel"
+        test_object = PandasDataLoader(file_path="../.data/test/file.xlsx")
+        method = test_object.select_pandas_import_engine()
+        result = method == expected_value
+        AssertionMessageHandler(f"Engine Check {test_object.file_type}", not result)
+
+    def test_select_pandas_import_method_csv(self):
+        result = EXPECTED_TO_PASS
+        expected_value = "read_csv"
+        test_object = PandasDataLoader(file_path="../.data/test/file.csv")
+        method = test_object.select_pandas_import_engine()
+        result = method == expected_value
+        AssertionMessageHandler(f"Engine Check {test_object.file_type}", not result)
+
+    def test_select_pandas_import_method_invalid(self):
+        expected_value = ""
+        test_object = PandasDataLoader(file_path="../.data/test/file.exe")
+        method = test_object.select_pandas_import_engine()
+        result = method == expected_value
+        AssertionMessageHandler(f"Engine Check {test_object.file_type}", not result)
 
     def test_create_dataframe_from_file(self):
-        AssertionMessageHandler(TEST_NOT_IMPLEMENTED, FAIL)
+        test_object = PandasDataLoader(file_path="../.data/test/file.csv")
+        test_object.data_frame = test_object.create_data_frame_from_file()
+
+    def test_create_data_frame_csv(self):
+        test_object = PandasDataLoader(file_path="../.data/test/file.csv")
+        df = test_object.create_data_frame_csv()
+        result = (len(df) > 0)
+        AssertionMessageHandler("Create from CSV", not result)
+
+    def test_create_dataframe_excel(self):
+        test_object = PandasDataLoader(file_path="../.data/test/file.xls")
+        df = test_object.create_data_frame_excel()
+        result = (len(df) > 0)
+        AssertionMessageHandler("Create from EXCEL", not result)
