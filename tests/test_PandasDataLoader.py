@@ -1,5 +1,3 @@
-import pytest
-
 from src.config.CONSTANTS import *
 from src.service.PandasDataLoader import PandasDataLoader
 from tests.AssertionMessageHandler import AssertionMessageHandler
@@ -69,6 +67,28 @@ class TestPandasDataLoader:
             result = FAIL
         AssertionMessageHandler("file_path throws AttributeError exception", result)
 
+    def test_invalidvalid_file_type_from_path_constructor(self):
+        result = EXPECTED_TO_PASS
+        try:
+            test_object = PandasDataLoader(file_path="data/file.exe")
+            success = test_object.is_valid_file_path()
+            if not success: result = FAIL
+        except AttributeError:
+            result = PASS
+        AssertionMessageHandler("test_invalidvalid_file_type_from_path_constructor AttributeError",
+                                result)
+
+    def test_invalidvalid_file_type_constructor(self):
+        result = EXPECTED_TO_PASS
+        try:
+            test_object = PandasDataLoader(file_path="data/file")
+            success = test_object.is_valid_file_path()
+            if not success: result = FAIL
+        except AttributeError:
+            result = PASS
+        AssertionMessageHandler("test_invalidvalid_file_type_from_path_constructor AttributeError",
+                                result)
+
     def test_valid_file_path(self):
         result = EXPECTED_TO_PASS
         message = "VALID file_path"
@@ -133,6 +153,13 @@ class TestPandasDataLoader:
         result = method == expected_value
         AssertionMessageHandler(f"Engine Check {test_object.file_type}", not result)
 
+    def test_select_pandas_import_method_invalid_bad_filename(self):
+        expected_value = ""
+        test_object = PandasDataLoader(file_path="data/file")
+        method = test_object.select_pandas_import_engine()
+        result = method == expected_value
+        AssertionMessageHandler(f"Engine Check {test_object.file_type}", not result)
+
     def test_create_dataframe_from_file(self):
         test_object = PandasDataLoader(file_path="data/file.csv")
         test_object.data_frame = test_object.create_data_frame_from_file()
@@ -148,3 +175,22 @@ class TestPandasDataLoader:
         df = test_object.create_data_frame_excel()
         result = (len(df) > 0)
         AssertionMessageHandler("Create from EXCEL", not result)
+
+    def test_create_data_frame_from_file(self):
+        result = EXPECTED_TO_PASS
+        message = "Test create dataframe from file"
+        try:
+            test_object = PandasDataLoader(file_path="data/file.csv")
+            test_object.create_data_frame_from_file()
+            if not (not (test_object.data_frame is not None) or not (len(test_object.data_frame) > 0)):
+                result = PASS
+            else:
+                result = FAIL
+                message = "Test create dataframe from file - DataFrame issue"
+        except FileNotFoundError:
+            result = FAIL
+            message = "Test create dataframe from file - FileNotFoundError"
+        except ValueError:
+            result = FAIL
+            message = "Test create dataframe from file - ValueError"
+        AssertionMessageHandler(message, result)

@@ -1,0 +1,37 @@
+title = "mint-reconiler-python-config"
+
+# JEZ:  Defines constants used for testing
+[TEST_CONSTANTS]
+EXPECTED_TO_FAIL = true
+EXPECTED_TO_PASS = true
+PASS = true
+FAIL = true
+TEST_NOT_IMPLEMENTED = "Test not implemented"
+
+
+[[FINANCIAL_INSTITUTIONS]]
+text = "Mint"
+code = "mint"
+type = "csv"
+
+[[FINANCIAL_INSTITUTIONS]]
+text = "Navy Federal - Checking"
+code = "nfcu-checking"
+type = "csv"
+
+[[FINANCIAL_INSTITUTIONS]]
+text = "Navy Federal - Savings"
+code = "nfcu-savings"
+type = "csv"
+
+[[FINANCIAL_INSTITUTIONS]]
+text = "Navy Federal - Credit Card"
+code = "nfcu-cc"
+type = "csv"
+
+# Configuration for outputting data
+[DATA_OUTPUT]
+dir = ".data/"
+file_name_format = "output_"
+# TODO:  Put data or something in between
+file_ext = ".csv"
