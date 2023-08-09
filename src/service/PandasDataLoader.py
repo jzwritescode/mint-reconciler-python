@@ -7,13 +7,16 @@ from src.config.CONSTANTS import VALID_FILE_TYPES, VALID_READER_ENGINE
 
 class PandasDataLoader:
     def __init__(self, file_path: str = "", *, file_type: str = ""):
-        self.file_path = file_path
-        self.file_type = file_type
+
         self.data_frame = None
 
         # attempt to parse out file
-        if file_path != "":
+        # TODO:  Do I need to take into account file_path == "" and file_type != ""
+        if file_path != "" and file_type == "":
             self.file_path, self.file_type = os.path.splitext(file_path)
+        else:
+            self.file_path = file_path
+            self.file_type = file_type
 
     def create_data_frame_from_file(self):
         match self.select_pandas_import_engine():

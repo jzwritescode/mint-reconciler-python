@@ -8,8 +8,8 @@ from tests.AssertionMessageHandler import AssertionMessageHandler
 class TestPandasDataLoader:
 
     def setup_class(self):
-        self.valid_path_constructor = PandasDataLoader(file_path="/path/to/file.csv", file_type="csv")
-        self.valid_type_constructor = PandasDataLoader(file_path="/path/to/file.csv", file_type="csv")
+        self.valid_path_constructor = PandasDataLoader(file_path="data/file", file_type=".csv")
+        self.valid_type_constructor = PandasDataLoader(file_path="data/file", file_type=".csv")
 
     def test_constructor_throws_type_error_for_none_file_path(self):
         result = EXPECTED_TO_FAIL
@@ -54,7 +54,7 @@ class TestPandasDataLoader:
     def test_constructor_valid_file_path(self):
         result = EXPECTED_TO_PASS
         try:
-            test_object = PandasDataLoader(file_path="/path/to/file.csv", file_type="csv")
+            test_object = PandasDataLoader(file_path="data/file.csv", file_type="csv")
             test_object.empty_value_check(test_object.file_path)
         except AttributeError:
             result = FAIL
@@ -63,7 +63,7 @@ class TestPandasDataLoader:
     def test_valid_file_type_from_path_constructor(self):
         result = EXPECTED_TO_PASS
         try:
-            test_object = PandasDataLoader(file_path="/path/to/file.csv")
+            test_object = PandasDataLoader(file_path="data/file.csv")
             success = test_object.is_valid_file_path()
         except AttributeError:
             result = FAIL
@@ -74,7 +74,7 @@ class TestPandasDataLoader:
         message = "VALID file_path"
         try:
             # setup here because exception may happen
-            test_object = PandasDataLoader(file_path="/path/to/file.csv")
+            test_object = PandasDataLoader(file_path="data/file.csv")
             success = test_object.is_valid_file_path()
         except TypeError:
             result = FAIL
@@ -106,7 +106,7 @@ class TestPandasDataLoader:
         @return: None
         """
         result = EXPECTED_TO_PASS
-        test_object = PandasDataLoader(file_path="/path/to/file.csv")
+        test_object = PandasDataLoader(file_path="data/file.csv")
         result = test_object.valid_file_type()
         AssertionMessageHandler(f"File type check {test_object.file_path}", not result)
 
@@ -128,7 +128,7 @@ class TestPandasDataLoader:
 
     def test_select_pandas_import_method_invalid(self):
         expected_value = ""
-        test_object = PandasDataLoader(file_path="../.data/test/file.exe")
+        test_object = PandasDataLoader(file_path="data/file.exe")
         method = test_object.select_pandas_import_engine()
         result = method == expected_value
         AssertionMessageHandler(f"Engine Check {test_object.file_type}", not result)
@@ -144,7 +144,7 @@ class TestPandasDataLoader:
         AssertionMessageHandler("Create from CSV", not result)
 
     def test_create_dataframe_excel(self):
-        test_object = PandasDataLoader(file_path="../.data/test/file.xls")
+        test_object = PandasDataLoader(file_path="data/file.xlsx")
         df = test_object.create_data_frame_excel()
         result = (len(df) > 0)
         AssertionMessageHandler("Create from EXCEL", not result)
