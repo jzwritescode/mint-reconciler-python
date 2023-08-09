@@ -26,7 +26,7 @@
 
 # This is a starter workflow to help you get started with EthicalCheck Actions
 
-name: mint-reconciler-python-ethnical-workflow
+name: mint-reconciler-python-ethical-check-workflow
 
 # Controls when the workflow will run
 on:
@@ -60,6 +60,30 @@ jobs:
           # The email address to which the penetration test report will be sent.
           email: "github@javierzapanta.com"
           sarif-result-file: "ethicalcheck-results.sarif"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
        - name: Upload sarif file to repository
          uses: github/codeql-action/upload-sarif@v2
