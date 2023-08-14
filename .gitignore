@@ -166,4 +166,4 @@ cython_debug/
 tests/.pytest_cache
 .vscode/
 
-.idea/
+/.idea/
